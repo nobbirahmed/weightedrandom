@@ -38,6 +38,23 @@ def getVal():
             rnd -= weights[i]
 
 if __name__ == '__main__':
-    getVal()
+    #getVal()
+    
+    f = open("MegaNumbers.txt", "r")
+    
+    lines = f.readlines()
+    megas = []
+    
+    for i, line in enumerate(lines):
+        
+        if i < 5: 
+            continue
+        
+        numbers = [int(c) for c in line.split()[-6:]]
+        mega = numbers.pop()
+        megas.append(mega)
+        #print(numbers)
+        
+    print("I am here")
 
 
