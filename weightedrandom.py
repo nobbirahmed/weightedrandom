@@ -1,60 +1,53 @@
 # weighted random practice
+#
+# yet to do - number appearing recently get lower weight
+#
 import random
 import sys, os
+from itertools import groupby
+import collections
 
-num_of_choices = 27
-
-items = [12, 22, 9, 24, 27, 21, 15, 18, 1, 19, 3, 26, 10, 16, 5, 25, 20, 6, 7, 4, 11, 23, 8, 13, 14, 17, 2]
-
-weights = []  # subjective
-for i in range(num_of_choices):
-    if i >= 0 and i < 5:
-        weights.append(2)
-    elif i >= 5 and i < 10:
-        weights.append(3)
-    elif i >= 10 and i < 15:
-        weights.append(4)
-    elif i >= 15 and i < 20:
-        weights.append(5)
-    else:
-        weights.append(6)
-        
-sum_of_weights = 0
-for i in range(num_of_choices):
-    sum_of_weights += weights[i]
-  
-#print sum_of_weights
-# sum_of_weights = 112
-
-def getVal():
-    rnd = random.randint(1, sum_of_weights)
-    print "Random : ", str(rnd)
-    for i in range(num_of_choices):
-        if rnd < weights[i]:
-            print "item number : " , str(i)
-            print "Selected number : ", items[i]
-            return items[i]
-        else:
-            rnd -= weights[i]
-
+# earlier code in Interest> Python 
 if __name__ == '__main__':
-    #getVal()
     
     f = open("MegaNumbers.txt", "r")
     
     lines = f.readlines()
     megas = []
     
+    slot1 = []
+    slot2 = []
+    slot3 = []
+    slot4 = []
+    slot5 = []
+    
     for i, line in enumerate(lines):
         
         if i < 5: 
             continue
-        
+
         numbers = [int(c) for c in line.split()[-6:]]
-        mega = numbers.pop()
-        megas.append(mega)
-        #print(numbers)
         
+        slot1.append(numbers[0])
+        slot2.append(numbers[1])
+        slot3.append(numbers[2])
+        slot4.append(numbers[3])
+        slot5.append(numbers[4])
+        megas.append(numbers[5])
+        #print(numbers)
+    
+    counter1 = collections.Counter(slot1)
+    print(counter1.most_common(5))
+    counter2 = collections.Counter(slot2)
+    print(counter2.most_common(5))
+    counter3 = collections.Counter(slot3)
+    print(counter3.most_common(5))
+    counter4 = collections.Counter(slot4)
+    print(counter4.most_common(5))
+    counter5 = collections.Counter(slot5)
+    print(counter5.most_common(5))
+    counter_mega = collections.Counter(megas)
+    print(counter_mega.most_common(5))
     print("I am here")
 
 
