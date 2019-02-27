@@ -2,11 +2,46 @@
 import random
 import sys
 
+#https://stackoverflow.com/questions/1761626/weighted-random-numbers
+def break_list(lst, size):
+    total = 0
+    result = [[]]
+    for v in lst:
+        total += len(v)
+        if total <= size:
+            result[-1].append(v)
+        else:
+            total = len(v)
+            if total > size:
+                raise Exception("Error: use a bigger size than {}".format(size))
+            result.append([v])
+    return result
+
+
 num_of_choices = 49
-print "1"
+
 # items to be populated from web
 items = [46, 29, 40, 12, 22, 47, 39, 9, 24, 41, 27, 33, 21, 15, 18, 1, 48, 38, 19, 32, 3, 44, 26, 30, 10, 42, 16, 5, 25, 20, 6, 49, 38, 7, 43, 4, 34, 35, 11, 31, 23, 8, 37, 13, 14, 17, 2, 36, 28, 45]
-print "2"
+
+x = break_list(items, 6)
+
+print(x)
+    
+##from collections import defaultdict
+##from collections import Counter
+##
+##freqs = Counter(items)
+##print(freqs)
+
+##freq = defaultdict(int)
+##for item in items:
+##    freq[item] += 1
+##
+##for k, v in freq:
+##    print(k, v)
+
+sys.exit()
+    
 weights = []  # subjective
 for i in range(num_of_choices):
     if i >= 0 and i < 7:
